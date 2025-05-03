@@ -1,8 +1,8 @@
 import { Server as NetServer } from "http";
 import { Server as ServerIO } from "socket.io";
 import { NextApiRequest } from "next";
-import { NextApiResponseServerIO } from "../../types/next";
-import { getRandomWord } from "../../lib/words";
+import { NextApiResponseServerIO } from "../../../types/next";
+import { getRandomWord } from "../../../lib/words";
 import { v4 as uuidv4 } from 'uuid';
 
 export const config = {
