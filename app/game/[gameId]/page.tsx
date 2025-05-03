@@ -28,15 +28,17 @@ type GameState = {
   isStarted?: boolean
 }
 
-export default function Game({
-  params,
-}: {
-  params: { gameId: string }
-}) {
+interface PageProps {
+  params: {
+    gameId: string
+  }
+}
+
+export default function Game({ params }: PageProps) {
   const router = useRouter()
   const [socket, setSocket] = useState<Socket | null>(null)
   const [players, setPlayers] = useState<Player[]>([])
-  const [gameState, setGameState] = useState<GameState>({ 
+  const [gameState, setGameState] = useState<GameState>({
     phase: "countdown",
     isNoNothingAssBitch: false
   })
