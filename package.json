@@ -33,14 +33,6 @@
   "overrides": {
     "semver": "^7.5.3",
     "word-wrap": "^1.2.4",
-    "postcss": "^8.4.31",
-    "json5": "^2.2.3",
-    "webpack": "^5.76.0"
-  },
-  "resolutions": {
-    "semver": "^7.5.3",
-    "word-wrap": "^1.2.4",
-    "postcss": "^8.4.31",
     "json5": "^2.2.3",
     "webpack": "^5.76.0"
   }
