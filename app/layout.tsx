@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, DM_Serif_Display, Space_Mono } from 'next/font/google'
+import { Inter, DM_Serif_Display, Space_Mono } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({
@@ -23,6 +23,7 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "No Nothing Ass Bitch",
   description: "Fake it 'til you make it… or fuck off.",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
