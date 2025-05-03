@@ -22,15 +22,17 @@ type GameState = {
   votes?: Record<string, string>
   noNothingAssBitchId?: string
   winner?: "normal" | "imposter"
+  round?: number
+  maxRounds?: number
+  currentWord?: string
+  isStarted?: boolean
 }
 
-type PageProps = {
-  params: {
-    gameId: string
-  }
-}
-
-export default function Game({ params }: PageProps) {
+export default function Game({
+  params,
+}: {
+  params: { gameId: string }
+}) {
   const router = useRouter()
   const [socket, setSocket] = useState<Socket | null>(null)
   const [players, setPlayers] = useState<Player[]>([])
@@ -81,7 +83,7 @@ export default function Game({ params }: PageProps) {
     socketInstance.on("gameState", (state: GameState) => {
       setGameState({
         ...state,
-        isNoNothingAssBitch: Boolean(state.isNoNothingAssBitch)
+        isNoNothingAssBitch: state.isNoNothingAssBitch ?? false
       })
     })
 
@@ -274,9 +276,9 @@ export default function Game({ params }: PageProps) {
             <button
               onClick={handleSubmitVote}
               className="btn-primary w-full"
-              disabled={!selectedVote || (gameState.votes && gameState.votes[socket?.id || ""])}
+              disabled={!selectedVote || Boolean(gameState.votes?.[socket?.id || ""])}
             >
-              {gameState.votes && gameState.votes[socket?.id || ""] ? "Vote Submitted" : "Submit Vote"}
+              {gameState.votes?.[socket?.id || ""] ? "Vote Submitted" : "Submit Vote"}
             </button>
           </div>
         )
