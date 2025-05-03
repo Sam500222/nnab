@@ -2,6 +2,7 @@ services:
   - type: web
     name: nnnab
     env: node
+    packageManager: pnpm
     buildCommand: pnpm install && pnpm run build
     startCommand: pnpm start
     healthCheckPath: /api/health
