@@ -28,13 +28,7 @@ type GameState = {
   isStarted?: boolean
 }
 
-interface PageProps {
-  params: {
-    gameId: string
-  }
-}
-
-export default function Game({ params }: PageProps) {
+export default function Game({ params }: { params: { gameId: string } }) {
   const router = useRouter()
   const [socket, setSocket] = useState<Socket | null>(null)
   const [players, setPlayers] = useState<Player[]>([])
