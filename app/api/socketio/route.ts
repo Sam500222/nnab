@@ -22,6 +22,12 @@ interface Game {
   isStarted: boolean;
   round: number;
   maxRounds: number;
+  isNoNothingAssBitch: boolean;
+  phase: "countdown" | "word-reveal" | "clue-giving" | "voting" | "results";
+  clues?: Record<string, string>;
+  votes?: Record<string, string>;
+  noNothingAssBitchId?: string;
+  winner?: "normal" | "imposter";
 }
 
 const games: Map<string, Game> = new Map();
@@ -56,7 +62,9 @@ export async function GET(req: NextRequest) {
           currentWord: "",
           isStarted: false,
           round: 0,
-          maxRounds: 5
+          maxRounds: 5,
+          isNoNothingAssBitch: false,
+          phase: "countdown"
         };
         games.set(gameId, game);
         socket.join(gameId);
@@ -107,7 +115,13 @@ export async function GET(req: NextRequest) {
         io.to(gameId).emit("gameStarted", {
           currentWord: game.currentWord,
           round: game.round,
-          maxRounds: game.maxRounds
+          maxRounds: game.maxRounds,
+          isNoNothingAssBitch: game.isNoNothingAssBitch,
+          phase: game.phase,
+          clues: game.clues,
+          votes: game.votes,
+          noNothingAssBitchId: game.noNothingAssBitchId,
+          winner: game.winner
         });
       });
 

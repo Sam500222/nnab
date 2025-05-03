@@ -15,7 +15,7 @@ type Player = {
 type GameState = {
   phase: "countdown" | "word-reveal" | "clue-giving" | "voting" | "results"
   word?: string
-  isNoNothingAssBitch?: boolean
+  isNoNothingAssBitch: boolean
   currentTurn?: string
   countdown?: number
   clues?: Record<string, string>
@@ -24,11 +24,20 @@ type GameState = {
   winner?: "normal" | "imposter"
 }
 
-export default function Game({ params }: { params: { gameId: string } }) {
+type PageProps = {
+  params: {
+    gameId: string
+  }
+}
+
+export default function Game({ params }: PageProps) {
   const router = useRouter()
   const [socket, setSocket] = useState<Socket | null>(null)
   const [players, setPlayers] = useState<Player[]>([])
-  const [gameState, setGameState] = useState<GameState>({ phase: "countdown" })
+  const [gameState, setGameState] = useState<GameState>({ 
+    phase: "countdown",
+    isNoNothingAssBitch: false
+  })
   const [playerInfo, setPlayerInfo] = useState<any>(null)
   const [myClue, setMyClue] = useState("")
   const [selectedVote, setSelectedVote] = useState("")
@@ -70,7 +79,10 @@ export default function Game({ params }: { params: { gameId: string } }) {
     })
 
     socketInstance.on("gameState", (state: GameState) => {
-      setGameState(state)
+      setGameState({
+        ...state,
+        isNoNothingAssBitch: Boolean(state.isNoNothingAssBitch)
+      })
     })
 
     socketInstance.on("connect_error", (err) => {
