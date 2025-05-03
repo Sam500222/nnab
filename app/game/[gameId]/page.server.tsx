@@ -1,19 +1,14 @@
 import { Metadata } from 'next'
 import Game from './page'
+import { GamePageProps } from './types'
 
-type PageProps = {
-  params: {
-    gameId: string
-  }
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: GamePageProps): Promise<Metadata> {
   return {
     title: `Game Room ${params.gameId}`,
     description: 'Join the game and have fun!',
   }
 }
 
-export default async function GamePage({ params }: PageProps) {
+export default async function GamePage({ params }: GamePageProps) {
   return <Game params={params} />
 } 

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { io, type Socket } from "socket.io-client"
 import { Clock, Check, ThumbsUp, ThumbsDown } from "lucide-react"
 import { Crown } from "lucide-react"
+import { GamePageProps } from './types'
 
 type Player = {
   id: string
@@ -28,13 +29,7 @@ type GameState = {
   isStarted?: boolean
 }
 
-type PageProps = {
-  params: {
-    gameId: string
-  }
-}
-
-export default function Game({ params }: PageProps) {
+export default function Game({ params }: GamePageProps) {
   const router = useRouter()
   const [socket, setSocket] = useState<Socket | null>(null)
   const [players, setPlayers] = useState<Player[]>([])
