@@ -378,3 +378,22 @@ export function getRandomWord(difficulty: string): string {
   const list = wordLists[difficulty as keyof typeof wordLists] || wordLists.bigboy
   return list[Math.floor(Math.random() * list.length)]
 }
+
+const words = [
+  "apple", "banana", "cherry", "date", "elderberry",
+  "fig", "grape", "honeydew", "kiwi", "lemon",
+  "mango", "nectarine", "orange", "pear", "quince",
+  "raspberry", "strawberry", "tangerine", "ugli", "vanilla",
+  "watermelon", "xigua", "yellow", "zucchini",
+  "airplane", "boat", "car", "dog", "elephant",
+  "fish", "giraffe", "house", "igloo", "jungle",
+  "kangaroo", "lion", "mountain", "night", "ocean",
+  "penguin", "queen", "rainbow", "sun", "tree",
+  "umbrella", "volcano", "whale", "xylophone", "yacht",
+  "zebra"
+];
+
+export function getRandomWord(): string {
+  const randomIndex = Math.floor(Math.random() * words.length);
+  return words[randomIndex];
+}
