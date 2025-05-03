@@ -1,15 +1,11 @@
 import { Server as NetServer } from "http";
 import { Server as ServerIO } from "socket.io";
-import { NextApiRequest } from "next";
-import { NextApiResponseServerIO } from "../../../types/next";
+import { NextRequest } from "next/server";
 import { getRandomWord } from "../../../lib/words";
 import { v4 as uuidv4 } from 'uuid';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 // Game state management
 interface Player {
@@ -30,12 +26,9 @@ interface Game {
 
 const games: Map<string, Game> = new Map();
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponseServerIO
-) {
-  if (!res.socket.server.io) {
-    const httpServer: NetServer = res.socket.server as any;
+export async function GET(req: NextRequest) {
+  if (!global.io) {
+    const httpServer = global.httpServer;
     const io = new ServerIO(httpServer, {
       path: "/api/socketio",
       addTrailingSlash: false,
@@ -154,8 +147,8 @@ export default function handler(
       });
     });
 
-    res.socket.server.io = io;
+    global.io = io;
   }
 
-  res.end();
+  return new Response("Socket.IO server is running", { status: 200 });
 }
