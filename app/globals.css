@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --champagne-gold: #f7e8d0;
+  --ratched-fuchsia: #e0007c;
+  --onyx: #0b0b0b;
+  --lilac-smoke: #d2c0eb;
+  --gossip-grey: #888888;
+}
+
+@layer base {
+  body {
+    @apply bg-champagne text-onyx;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-fuchsia text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-fuchsia text-fuchsia font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+  }
+
+  .input-field {
+    @apply bg-white border-2 border-gossip rounded-lg py-3 px-4 w-full focus:outline-none focus:border-fuchsia transition-all duration-300;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg p-6 border border-lilac;
+  }
+
+  .countdown {
+    @apply font-mono text-6xl text-fuchsia;
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: var(--ratched-fuchsia);
+  animation: confetti 5s ease-in-out infinite;
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
