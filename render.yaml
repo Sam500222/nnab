@@ -4,8 +4,10 @@ services:
     env: node
     plan: starter
     memory: 512MB
-    packageManager: pnpm
-    buildCommand: pnpm install && pnpm run build
+    buildCommand: |
+      corepack enable
+      pnpm install
+      pnpm run build
     startCommand: pnpm start
     healthCheckPath: /api/health
     autoDeploy: true
